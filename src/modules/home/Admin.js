@@ -20,9 +20,7 @@ const Admin = ({ navigation }) => {
   const checkOTP = () => {
     const enteredOTP = otp.join(''); 
 
-    
     if (enteredOTP === generatedOTP) {
-     
       Alert.alert('OTP Matched');
     } else {
       Alert.alert('OTP Doesn\'t Match');
@@ -57,12 +55,14 @@ const Admin = ({ navigation }) => {
             ))}
           </View>
         </View>
-        <TouchableOpacity
-          onPress={() => checkOTP()}
-          style={styles.logoutContainer}>
-          <Text style={styles.text2}>Verify OTP</Text>
-          
-        </TouchableOpacity>
+        <View style={styles.bottomButtons}>
+          <TouchableOpacity onPress={() => checkOTP()} style={styles.verifyButton}>
+            <Text style={styles.text2}>Verify OTP</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.logoutButton}>
+            <Text style={styles.text2}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </LinearGradient>
   )
@@ -86,11 +86,27 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000'
   },
-  logoutContainer: {
+  bottomButtons: {
     position: 'absolute',
     bottom: 0,
-    right: 0,
-    margin: 16
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 16,
+    marginBottom: 16
+  },
+  verifyButton: {
+    backgroundColor: '#841584',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    marginRight: 10
+  },
+  logoutButton: {
+    backgroundColor: '#841584',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10
   },
   otpContainer: {
     flexDirection: 'row',
