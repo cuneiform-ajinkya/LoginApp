@@ -10,6 +10,8 @@ import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { useRef } from "react";
 import { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Admin = () => {
   const et1 = useRef();
@@ -27,12 +29,14 @@ const Admin = () => {
     const max = 9999;
 
     const otp = Math.floor(Math.random() * (max - min + 1)) + min;
-    let enteredOtp = f1 + f2 + f3 + f4;
 
-
+    AsyncStorage.setItem('otp', otp.toString()); 
     console.log(otp);
   };
-  const validateOtp = (otp , enteredOtp) => {
+  const validateOtp = async() => {
+    const otp = await AsyncStorage.getItem('otp');
+    let enteredOtp = f1 + f2 + f3 + f4;
+
 
     if (enteredOtp == otp) {
       Alert.alert("Otp Matched");
